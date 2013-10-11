@@ -6,6 +6,7 @@ class Advertisement < ActiveRecord::Base
   attr_accessible :campaign_url,
                   :raw_parameter,
                   :medium_id,
+                  :price
 
 
   has_many :inflowers
