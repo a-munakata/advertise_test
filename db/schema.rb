@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131011044310) do
+ActiveRecord::Schema.define(:version => 20131011074640) do
 
   create_table "ad_reports", :force => true do |t|
     t.integer  "advertisement_id"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20131011044310) do
     t.datetime "updated_at",    :null => false
     t.string   "raw_parameter"
     t.integer  "medium_id"
+    t.integer  "price"
   end
 
   add_index "advertisements", ["campaign_url"], :name => "index_advertisements_on_campaign_url"
