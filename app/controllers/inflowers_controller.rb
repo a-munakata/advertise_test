@@ -1,3 +1,2 @@
 class InflowersController < ApplicationController
-
 end
