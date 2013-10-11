@@ -34,4 +34,5 @@ AdvertiseTest::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  config.secret_token = ENV["SECRET_TOKEN"]
 end
