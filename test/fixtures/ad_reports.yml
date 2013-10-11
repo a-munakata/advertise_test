@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  advertisement_id: 1
+  count: 1
+  checked_at: 2013-10-11 13:26:52
+
+two:
+  advertisement_id: 1
+  count: 1
+  checked_at: 2013-10-11 13:26:52
