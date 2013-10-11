@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  campaign_url: MyString
+  referrer: MyString
+  opportunity: MyString
+
+two:
+  campaign_url: MyString
+  referrer: MyString
+  opportunity: MyString
