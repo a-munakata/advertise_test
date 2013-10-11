@@ -4,7 +4,7 @@ class Inflower < ActiveRecord::Base
   attr_accessible :campaign_url, :opportunity, :referrer, :is_signed_up, :unique_id, :survey_count, :plan_id
 
   belongs_to :advertisement
-  belongs_to :medium, :through => :advertisement
+  #belongs_to :medium, :through => :advertisement
 
   def self.fetch_latests
     # 例えば
