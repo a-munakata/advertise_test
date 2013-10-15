@@ -5,24 +5,24 @@ require 'modules/basic_chart'
 module InflowersChart
   include BasicChart
 
-  def inflowers_chart
-    #unique_pageviews = @results.collect{ |result| result.inject(0){|sum, i| i[0].to_i + sum } }
-    inflowers_count = Hash[*inflowers_count(7).compact.flatten]
+  def inflowers_chart(demension, index, period)
+
+    inflowers_count = Hash[*inflowers_count(period, index).compact.flatten]
 
     chart_data = {
       title: {
-        text: "unique_pageviews"
+        text: get_title[index]
       },
       xAxis: {
         categories: inflowers_count.keys
       },
       yAxis: {
         title: {
-          text: 'users'
+          text: demension
         }
       },
       series: [{
-                 name: 'ユーザー数',
+                 name: get_series_title[index],
                  data: inflowers_count.values
                }]
     }
@@ -30,22 +30,21 @@ module InflowersChart
     basic_chart_option.deep_merge(chart_data)
   end
 
-  def inflowers_count(period)
+  def get_title
+    ["訪問数", "ページビュー数", "新規訪問数"]
+  end
+
+  def get_series_title
+    ["ユーザー数", "PV数", "ユーザー数"]
+  end
+
+  def inflowers_count(period, index)
+    set_date = period - 1
     period.times.collect do |p|
       [
-        (Time.now.change(:hour => 0, :min => 0, :sec => 0) - (period - p).days ).strftime("%m/%d"),
-        @results[p].inject(0){ |sum, i| i[0].to_i + sum }
+        (Time.now.change(:hour => 0, :min => 0, :sec => 0) - (set_date - p).days ).strftime("%m/%d"),
+        @results[p].inject(0){ |sum, i| i[index].to_i + sum }
       ]
     end
   end
-
-  def main_title(interval)
-    case interval
-      when "monthly"
-        "月ごとのユーザー増加推移"
-      when "daily"
-        "最近1ヶ月のユーザー増加推移"
-    end
-  end
-
 end

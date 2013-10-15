@@ -5,22 +5,28 @@ class InflowersController < ApplicationController
   include InflowersChart
   before_filter :ga_setting
 
+
   def index
-    @inflowers_chart = inflowers_chart.to_json
+    @chart_results = @demensions.each_with_index.collect do |demension, index|
+      inflowers_chart(demension, index, @period).to_json
+    end
   end
 
   def ga_setting
-    @demensions = ["pageviews", "visitors", "new_visits"]
+    @period = 7
+
+    @demensions = ["visits", "pageviews", "new_visits"]
     Garb::Session.login(ENV["GA_USER"], ENV["GA_PASSWD"])
 
     profile = Garb::Management::Profile.all.detect do |p|
       p.web_property_id == ENV["GA_PROPERTY_ID"]
     end
 
-    @results = 7.times.collect do |n|
+    @results = @period.times.collect do |n|
+      set_date = @period - 1
       options = {
-        :start_date => Date.today - (7 - n).day,
-        :end_date => Date.today - (7 - n).day
+        :start_date => Date.today - (set_date - n).day,
+        :end_date => Date.today - (set_date - n).day
       }
 
       rs = Result.results(profile, options)
@@ -37,7 +43,7 @@ class InflowersController < ApplicationController
 
   class Result
     extend Garb::Model
-    metrics :pageviews, :visitors, :new_visits
+    metrics :pageviews, :visitors, :new_visits, :visits
     dimensions :visitor_type
   end
 end
