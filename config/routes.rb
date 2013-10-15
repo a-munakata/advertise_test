@@ -11,7 +11,12 @@ AdvertiseTest::Application.routes.draw do
   resources :advertisements
 
 
-  resources :inflowers
+  resources :inflowers do
+    collection do
+      post 'index', :to => 'inflowers#index', :as => 'update'
+    end
+  end
+
 
 
   # The priority is based upon order of creation:

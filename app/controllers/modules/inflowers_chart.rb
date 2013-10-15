@@ -44,8 +44,8 @@ module InflowersChart
     period.times.collect do |p|
       adjust_time = p + 1
       [
-        (@start_date - (period - adjust_time).days ).strftime("%m/%d"),
-        GaReport.where(:date => (@start_date - (period - adjust_time).days ))
+        (@end_date - (period - adjust_time).days ).strftime("%m/%d"),
+        GaReport.where(:date => (@end_date - (period - adjust_time).days ))
                 .last.send(@demensions[index])
       ]
     end

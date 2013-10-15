@@ -5,4 +5,5 @@ jQuery ->
         $(element).highcharts $(element).data('chart')
 
   $(document).ready change
-  $(document).on "change", "select", change
+  $(document).ready () ->
+    $( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'})

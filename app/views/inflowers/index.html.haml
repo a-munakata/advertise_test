@@ -1,4 +1,10 @@
+= form_for 'range', {:action => 'index'} do |f|
+  = f.label "Start Date"
+  = f.text_field :start_date, :class => 'datepicker'
+
+  = f.label "End Date"
+  = f.text_field :end_date, :class => 'datepicker'
+  = f.submit "ok", :class => 'range_button'
+
 - @chart_results.each do |chart|
   .chart{ data: { chart: chart } }
-
-
