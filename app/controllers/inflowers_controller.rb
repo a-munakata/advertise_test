@@ -13,20 +13,24 @@ class InflowersController < ApplicationController
   end
 
   def ga_setting
-    @period = 7
+    @start_date = Date.today
+    @end_date   = Date.today - 7.days
+    @period = (@start_date - @end_date).to_i
 
+    @ga_set_date = @start_date
     @demensions = ["visits", "pageviews", "new_visits"]
+
     Garb::Session.login(ENV["GA_USER"], ENV["GA_PASSWD"])
 
     profile = Garb::Management::Profile.all.detect do |p|
       p.web_property_id == ENV["GA_PROPERTY_ID"]
     end
 
-    @results = @period.times.collect do |n|
-      set_date = @period - 1
+    @results = @period.times.collect do |p|
+      adjust_time = p + 1
       options = {
-        :start_date => Date.today - (set_date - n).day,
-        :end_date => Date.today - (set_date - n).day
+        :start_date => @ga_set_date- (@period - adjust_time).day,
+        :end_date => @ga_set_date - (@period - adjust_time).day
       }
 
       rs = Result.results(profile, options)

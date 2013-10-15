@@ -21,10 +21,12 @@ module InflowersChart
           text: demension
         }
       },
-      series: [{
-                 name: get_series_title[index],
-                 data: inflowers_count.values
-               }]
+      series: [
+        {
+         name: get_series_title[index],
+         data: inflowers_count.values
+        }
+      ]
     }
 
     basic_chart_option.deep_merge(chart_data)
@@ -39,10 +41,10 @@ module InflowersChart
   end
 
   def inflowers_count(period, index)
-    set_date = period - 1
     period.times.collect do |p|
+      adjust_time = p + 1
       [
-        (Time.now.change(:hour => 0, :min => 0, :sec => 0) - (set_date - p).days ).strftime("%m/%d"),
+        (@start_date - (period - adjust_time).days ).strftime("%m/%d"),
         @results[p].inject(0){ |sum, i| i[index].to_i + sum }
       ]
     end
