@@ -13,7 +13,7 @@ class GaReport < ActiveRecord::Base
     end
 
     @results = @fetch_period.times.collect do |p|
-      adjust_time = @ga_set_date - (@fetch_period - p + 1).days
+      adjust_time = @ga_set_date - (@fetch_period - p).days
 
       options = {
         :start_date => adjust_time,
@@ -31,6 +31,7 @@ class GaReport < ActiveRecord::Base
             :date       => adjust_time
           )
         rescue => e
+          puts e
         end
       end
     end
