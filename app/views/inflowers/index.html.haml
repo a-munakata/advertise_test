@@ -1,0 +1,11 @@
+- @results.each do |result|
+  %h1 :unique_pageviews
+  = result.inject(0) { |sum, i| sum + i[0].to_i }
+  %h1 :visitors
+  = result.inject(0) { |sum, i| sum + i[1].to_i }
+  %h1 :new_visits
+  = result.inject(0) { |sum, i| sum + i[2].to_i }
+
+.chart{ data: { chart: @inflowers_chart } }
+
+
