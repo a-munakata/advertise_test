@@ -23,7 +23,7 @@ class Advertisement < ActiveRecord::Base
   def detect_medium
     self.raw_parameter = URI.parse(campagin_url).query
     queries            = raw_parameter && Hash[*(raw_parameter.split("&").collect{|p| p.split("=")}.flatten)]
-    medium_name         = queries["utm_source"]
+    medium_name        = queries["utm_source"]
 
     medium = medium_name && Medium.find_by_name(medium_name)
     medium = Medium.find_or_create_by_name(medium_name) if medium_name && medium.nil?

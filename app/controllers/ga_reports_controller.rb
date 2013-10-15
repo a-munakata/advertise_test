@@ -1,0 +1,2 @@
+class GaReportsController < ApplicationController
+end

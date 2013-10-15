@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131011074640) do
+ActiveRecord::Schema.define(:version => 20131015062024) do
 
   create_table "ad_reports", :force => true do |t|
     t.integer  "advertisement_id"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(:version => 20131011074640) do
 
   add_index "advertisements", ["campaign_url"], :name => "index_advertisements_on_campaign_url"
   add_index "advertisements", ["medium_id"], :name => "index_advertisements_on_medium_id"
+
+  create_table "ga_reports", :force => true do |t|
+    t.integer  "visits"
+    t.integer  "new_visits"
+    t.integer  "pageviews"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.date     "date"
+  end
+
+  add_index "ga_reports", ["date"], :name => "index_ga_reports_on_date", :unique => true
 
   create_table "inflowers", :force => true do |t|
     t.string   "campaign_url"

@@ -1,4 +1,7 @@
 AdvertiseTest::Application.routes.draw do
+  resources :ga_reports
+
+
   resources :ad_reports
 
 
